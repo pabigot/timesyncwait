@@ -1,0 +1,14 @@
+[Unit]
+Description=Wait Until Kernel Time Synchronized
+DefaultDependencies=no
+After=systemd-remount-fs.service
+Before=time-synchronized.target
+Wants=time-synchronized.target
+
+[Service]
+Type=oneshot
+ExecStart=@rootlibexecdir@/timesyncwait
+TimeoutStartSec=infinity
+
+[Install]
+WantedBy=sysinit.target
